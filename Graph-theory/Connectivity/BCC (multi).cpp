@@ -9,7 +9,8 @@
 /* Node-Biconnected Component
   iscut[]为割点集
   bcc[]为双连通点集
-  割顶的bccno[]无意义       */
+  割顶的bccno[]无意义       
+*/
 struct Edge{
     int u,v;
 }e[N*N];
@@ -71,7 +72,8 @@ void find_bcc()
 
 /* Edge-Biconnected Component(可以处理重边)
   iscut[]为割边集
-  bccno[]为双连通点集,保存为编号        */
+  bccno[]为双连通点集,保存为编号        
+*/
 struct Edge{
     int u,v;
 }e[N*N];
@@ -122,7 +124,8 @@ void find_bcc()
 
 /* Edge-Biconnected Component(不能处理重边)
   iscut[]为割边集
-  bccno[]为双连通点集,保存为编号        */
+  bccno[]为双连通点集,保存为编号        
+*/
 struct Edge{
     int u,v;
 }e[N*N];
