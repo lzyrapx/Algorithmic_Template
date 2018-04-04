@@ -1,5 +1,6 @@
 /*  Spaly tree   O(log n)   
-[NOI2005]维修数列：http://www.cnblogs.com/zhsl/p/3227535.html （区间反转，求和，删除，改变，最值） */
+[NOI2005]维修数列：http://www.cnblogs.com/zhsl/p/3227535.html （区间反转，求和，删除，改变，最值） 
+*/
 
 #define Key_value ch[ch[root][1]][0]
 int pre[N],key[N],ch[N][2];  //分别表示父结点，键值，左右孩子(0为左孩子，1为右孩子),根结点，结点数量
