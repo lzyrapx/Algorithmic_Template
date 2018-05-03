@@ -3,8 +3,8 @@ using namespace std;
 
 const int N = 10000;
 /*   
-	SCC
-    O(E)
+   SCC
+   O(E)
    tarjan算法
    sccno[]强连通集合,用编号标示.
 */
