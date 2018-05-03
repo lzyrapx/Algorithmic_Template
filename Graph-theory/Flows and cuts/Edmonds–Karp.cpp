@@ -20,10 +20,10 @@ queue<int> que;
 
 int BFS(int src,int des)
 {
-    int i,j;
-    while(!que.empty())       //队列清空
-        que.pop();
-    for(i=1;i<m+1;i++)
+
+    while(!que.empty())  que.pop();     //队列清空
+        
+    for(int i=1;i<m+1;i++)
     {
         pre[i]=-1;
     }
@@ -36,7 +36,7 @@ int BFS(int src,int des)
         que.pop();
         if(index == des)            //找到了增广路径
             break;
-        for(i=1;i<m+1;i++)
+        for(int i=1;i<m+1;i++)
         {
             if(i!=src && capacity[index][i]>0 && pre[i]==-1)
             {
@@ -75,18 +75,16 @@ int maxFlow(int src,int des)
 
 int main()
 {
-    int i,j;
     int S,T;
     int start,end,cap;
     while(cin>>n>>m>>S>>T)
     {
         memset(capacity,0,sizeof(capacity));
         memset(flow,0,sizeof(flow));
-        for(i=0;i<m;i++)
+        for(int i=0;i<m;i++)
         {
             cin>>start>>end>>cap;
-            if(start == end)               //考虑起点终点相同的情况
-               continue;
+            if(start == end)  continue;           //考虑起点终点相同的情况  
             capacity[start][end] +=cap;     //此处注意可能出现多条同一起点终点的情况
         }
         cout<<maxFlow(S,T)<<endl; //S 到 T的最大流
