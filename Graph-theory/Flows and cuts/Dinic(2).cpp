@@ -35,16 +35,15 @@ void addedge(int a,int b,int val)
 int bfs()
 {
     //std::cout << "bfs" << '\n';
-    int u,i,j;
     queue<int> q;
     memset(d,0,sizeof(d));
     q.push(S);
     d[S]=1;
     while(!q.empty()){
-        u=q.front();
+        int u=q.front();
         q.pop();
         //这里为什么是i！=-1呢？因为，标号是从0开始的
-        for(i=first[u];i!=-1;i=Next[i]){
+        for(int i=first[u];i!=-1;i=Next[i]){
             if(e[i].cap && !d[e[i].v]){
                 d[e[i].v]=d[u]+1;
                 q.push(e[i].v);
@@ -111,5 +110,4 @@ int main()
 
 answer: 
 7
-
 */
