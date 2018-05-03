@@ -1,7 +1,7 @@
 
-// ´øÈ¨ÓĞÏòÍ¼£¬ÇóÔ´µ½ÆäËûËùÓĞ¸÷¶¥µãµÄ×î¶ÌÂ·¾¶³¤¶È¡£
-// µ¥Ô´×î¶ÌÂ·¾¶ÎÊÌâ£¬µ«²»ÄÜ´¦Àí´ø¸ºÈ¨±ßµÄÍ¼ 
-// ×î¶ÌÂ·£ºdijkstraËã·¨
+// å¸¦æƒæœ‰å‘å›¾ï¼Œæ±‚æºåˆ°å…¶ä»–æ‰€æœ‰å„é¡¶ç‚¹çš„æœ€çŸ­è·¯å¾„é•¿åº¦ã€‚
+// å•æºæœ€çŸ­è·¯å¾„é—®é¢˜ï¼Œä½†ä¸èƒ½å¤„ç†å¸¦è´Ÿæƒè¾¹çš„å›¾ 
+// æœ€çŸ­è·¯ï¼šdijkstraç®—æ³•
 
 /*
 The time complexity of the  implementation is O(n+mlogm), because
@@ -9,9 +9,9 @@ the algorithm goes through all nodes of the graph and adds for each edge at most
 one distance to the priority queue.
 */
 
-// Ëã·¨µÄÊµÏÖÄ£°å£º
-#define MaxN 10010 //MaxNÊÇµãµÄ¸öÊı
-#define MaxInt 200000000  //MabInt±íÊ¾²»¿É´ï
+// ç®—æ³•çš„å®ç°æ¨¡æ¿ï¼š
+#define MaxN 10010 //MaxNæ˜¯ç‚¹çš„ä¸ªæ•°
+#define MaxInt 200000000  //MabIntè¡¨ç¤ºä¸å¯è¾¾
 int map[MaxN][MaxN],dist[MaxN];
 bool mark[MaxN];
 int start,end;
@@ -21,11 +21,11 @@ int dijlstra()
 	for(int i=1;i<=end;i++) dist[i]=MaxInt;
       memset(mark,0,sizeof(mark));
       dist[start]=0;
-      //°ÑÆğµã²¢Èë¼¯ºÏ£¬ËÑË÷µÄ¾Í¿ÉÒÔ´ÓÆğµãÑ°ÕÒµÚÒ»Ìõ×î¶ÌµÄ±ßÁË
+      //æŠŠèµ·ç‚¹å¹¶å…¥é›†åˆï¼Œæœç´¢çš„å°±å¯ä»¥ä»èµ·ç‚¹å¯»æ‰¾ç¬¬ä¸€æ¡æœ€çŸ­çš„è¾¹äº†
 	  for(int i=1;i<=end-1;i++)
 	  {
 	  	min1=MaxInt;
-	  	for(int j=1;j<=end;j++)  //²éÕÒµ½Ô­¼¯ºÏµÄ×î¶ÌµÄ±ß 
+	  	for(int j=1;j<=end;j++)  //æŸ¥æ‰¾åˆ°åŸé›†åˆçš„æœ€çŸ­çš„è¾¹ 
 	  	{
 	  		if(!mark[j] && dist[j]<min1)
 	  		{
@@ -34,7 +34,7 @@ int dijlstra()
 	  		}
 	  	}
 	  	mark[minj]=1;
-//Ã¿²¢ÈëÒ»¸öµã¶¼Òª¶ÔÔ­À´µÄ±ä½øĞĞĞŞÕı£¬±£Ö¤ÈÎÒâÊ±¿ÌÔ´µãµ½Ä¿±êµãµÄ¾àÀë¶¼ÊÇ×î¶ÌµÄ 
+		//æ¯å¹¶å…¥ä¸€ä¸ªç‚¹éƒ½è¦å¯¹åŸæ¥çš„å˜è¿›è¡Œä¿®æ­£ï¼Œä¿è¯ä»»æ„æ—¶åˆ»æºç‚¹åˆ°ç›®æ ‡ç‚¹çš„è·ç¦»éƒ½æ˜¯æœ€çŸ­çš„ 
 		  for(int j=1;j<=end;j++)
 		  {
 		  	if(!mark[j] && map[minj][j]>0)
