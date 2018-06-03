@@ -2,7 +2,7 @@
 using namespace std;
 typedef long long ll;
 
-//  n^2logn
+//  n^2logk
 
 const ll mod=1000000007;
 ll qpower(ll a,ll b)
