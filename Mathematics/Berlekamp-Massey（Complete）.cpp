@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 typedef long long ll;
+
+//  n^2logn
+
 const ll mod=1000000007;
 ll qpower(ll a,ll b)
 {
