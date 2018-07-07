@@ -1,0 +1,29 @@
+/*   &取代%  2^n用&   */
+int main(int argc, char* argv[])
+{
+    int a = 0x111;
+    int b = 0x222;
+    int c = 0;
+    int d = 0;
+    c = a & (b-1);
+    d = a % b;
+    return 0;
+}
+
+看反汇编的结果：
+
+13:       c = a & (b-1);
+00401044   mov         eax,dword ptr [ebp-8]
+00401047   sub         eax,1
+0040104A   mov         ecx,dword ptr [ebp-4]
+0040104D   and         ecx,eax
+0040104F   mov         dword ptr [ebp-0Ch],ecx
+14:       d = a % b;
+00401052   mov         eax,dword ptr [ebp-4]
+00401055   cdq
+00401056   idiv        eax,dword ptr [ebp-8]
+00401059   mov         dword ptr [ebp-10h],edx
+
+可以看到，&操作用了:3mov+1and+1sub  %操作用了：2mov+1cdp+1idiv
+我们可以查阅Coding_ASM_-_Intel_Instruction_Set_Codes_and_Cycles资料，发现前者只需5个CPU周期，
+而后者至少需要26个CPU周期（注意，是最少！！！） 效率显而易见。所以以后自己在写的时候，也可以使用前者的写法。

@@ -1,0 +1,57 @@
+//http://blog.csdn.net/wmdcstdio/article/details/44596305
+
+1：COGS 2.旅行计划
+题目地址：
+http://cogs.pro/cogs/problem/problem.php?pid=2
+求起点到所有点的最短路，可以用pb_ds中的priority_queue优化Dijkstra
+代码：
+http://cogs.pro/cogs/submit/code.php?id=149462
+tips：
+①声明格式必须是__gnu_pbds::priority_queue，因为STL里还有另一个priority_queue
+②pb_ds包含的这些堆的迭代器是point_iterator而非iterator（见代码16行）
+③push函数有返回值，返回指向插入元素的迭代器
+④可以用Q.modify(iter,val)这样的用法（iter是迭代器,val是新值）来修改堆中元素，不必像用原先那种priority_queue时那样非常奇怪地新插元素再记used数组
+
+2：BZOJ 3040.最短路(road)
+题目地址：
+http://www.lydsy.com:808/JudgeOnline/problem.php?id=3040
+李煜东出的题，猥琐地卡堆优化Dijkstra的堆效率，一般堆过不去，出题人给的题解是用Fibonacci堆，我们可以用pb_ds中的配对堆（标签：pairing_heap_tag）
+或thin_heap（据说像是Fibonacci堆的玩意，标签：thin_heap_tag）通过
+代码：
+http://fayaa.com/code/view/28244/
+用邻接表写的，不同于上一题的vector存边
+
+3：COGS 1829/Tyvj 1728.普通平衡树
+题目地址：
+http://cogs.pro/cogs/problem/problem.php?pid=1829
+需要实现一个支持点插入，点删除，查询rank，求第k大，求前驱/后继的数据结构
+正好可以用pb_ds中的tree实现
+pb_ds中tree的功能：set/map支持的所有功能，还包括查询rank，求第k大，按值分割（把值>=x的割到另一棵树中），合并值域不相交的两棵树
+为了实现查询rank和求第k大，必须加上tree_order_statistics_node_update
+代码：
+http://cogs.pro/cogs/submit/code.php?id=149421
+tips：
+①null_mapped_type是用来占位的，如果它是一个真正的数据类型那就是map，如果像这样就是set。在一些编译器上（如COGS的编译器）必须用null_mapped_type，在另一些编译器上必须用null_type
+②即使键类型是long long，你仍然可以强行把比较器定义成less或者greater，当然会出bug
+③pb_ds不资瓷类似multiset/multimap的玩意，你必须自行搞一个偏移量。我的方法是把每个元素乘以2^20后加上偏移量，偏移量是‘当前重复了几次’，再用一个map来维护“每个元素出现了几次”，前驱后继直接在map上计算
+
+4：COGS 314.[NOI2004]郁闷的出纳员
+题目地址：
+http://cogs.pro/cogs/problem/problem.php?pid=314
+要求实现：点插入，求第k大，删除小于某个值的元素（需要记录删了多少）
+“删除小于某个值的元素”用split实现，用greater比较，删除的命令类似于T.split(low,TE)，其中TE是一棵无用的树
+代码：
+http://cogs.pro/cogs/submit/code.php?id=149424
+tips：find_by_order和order_of_key中的“order”都是从0开始数的
+
+5：COGS 194.[HAOI2008]排名系统
+题目地址：
+http://cogs.pro/cogs/problem/problem.php?pid=197
+要求：点插入/更新，查询rank，求第k大，但元素是一个结构体（名字，得分，更新时间）
+用到了pb_ds中的tree和hash_table
+tree中存放结构体，为了比较我们需要自定义伪函数，所谓伪函数就是一个内部重载了()运算符的class，见代码中的Compare类。对于这道题，我们在Compare类中重载()运算符，实现“<”的功能，并将其放在上几题中greater的位置上。
+需要注意，Compare类中重载()运算符时，一定要在函数体前加一个const（见代码24行花括号前的const），代表该函数不会改变传入的元素，否则会编译失败。
+pb_ds中的hash_table作用跟map差不多，有cc_hash_table和gp_hash_table两种，前者是用链表存冲突元素，后者是用试探法解决冲突。
+hash_table用法和map类似（广义数组），但注意它的迭代器叫point_iterator而非iterator，和priority_queue一样
+代码：
+http://cogs.pro/cogs/submit/code.php?id=149448
