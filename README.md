@@ -1,3 +1,3 @@
 # Algorithmic_Library
 #### LzyRapx 's code Library for competitive-programming.
-## TODO
+-- Black_magic
