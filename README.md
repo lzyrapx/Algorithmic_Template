@@ -53,6 +53,10 @@
    + [x] Floyd–Warshall
    + [x] K短路
    + [x] SPFA
+ + [x] Spanning-tree
+   + [x] Kruskal (MST和次小生成树)
+   + [x] prim
+   + [x] 曼哈顿距离MST
 ## Mathematics
 ## String
 ## Others
