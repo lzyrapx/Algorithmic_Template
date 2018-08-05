@@ -20,7 +20,23 @@
 + [x] Splay Tree
 + [x] merge_sort
 ## Geometry
++ [ ] 基本类型 - 点, 线
++ [ ] 多边形
++ [ ] 半平面交
++ [ ] 圆
++ [ ] 三维几何
++ [ ] 球面几何
++ [ ] 平面最近点对
++ [ ] 曼哈顿距离生成树
++ [ ] 最大空凸包
++ [ ] 平面图求域
 ## Graph-theory
++ [x] Connectivity
+  + [x] BCC
+  + [x] BCC_edge
+  + [x] BCC_vertex
+  + [x] Kosaraju
+  + [x] Tarjan_SCC
 ## Mathematics
 ## String
 ## Others
