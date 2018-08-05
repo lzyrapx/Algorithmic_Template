@@ -44,16 +44,16 @@
   + [x] MinCostMaxFlow
   + [x] edge-disjoint-path
   + [x] maximum_flow_goldberg_tarjan
- + [x] Matching
++ [x] Matching
   + [x] Kuhn-Munkras
   + [x] Hungarian method (匈牙利算法)
- + [x] Shortest-path
++ [x] Shortest-path
    + [x] Bellman-Ford
    + [x] Dijkstra
    + [x] Floyd–Warshall
    + [x] K短路
    + [x] SPFA
- + [x] Spanning-tree
++ [x] Spanning-tree
    + [x] Kruskal (MST和次小生成树)
    + [x] prim
    + [x] 曼哈顿距离MST
