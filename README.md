@@ -37,6 +37,22 @@
   + [x] BCC_vertex
   + [x] Kosaraju
   + [x] Tarjan_SCC
++ [x] Flows and cuts
+  + [x] Dinic
+  + [x] Edmonds–Karp
+  + [x] Ford-Fulkerson
+  + [x] MinCostMaxFlow
+  + [x] edge-disjoint-path
+  + [x] maximum_flow_goldberg_tarjan
+ + [x] Matching
+  + [x] Kuhn-Munkras
+  + [x] Hungarian method (匈牙利算法)
+ + [x] Shortest-path
+   + [x] Bellman-Ford
+   + [x] Dijkstra
+   + [x] Floyd–Warshall
+   + [x] K短路
+   + [x] SPFA
 ## Mathematics
 ## String
 ## Others
