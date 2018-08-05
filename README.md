@@ -58,5 +58,30 @@
    + [x] prim
    + [x] 曼哈顿距离MST
 ## Mathematics
++ [x] BSGS
++ [x] Berlekamp-Massey
++ [x] Berlekamp-Massey (杜教版)
++ [x] CRT（模数不互质）
++ [x] CRT（模数互质）
++ [x] Cantor
++ [x] Check_primitive_root
++ [x] Dirichlet卷积
++ [x] EX_BSGS
++ [x] Euler_Function
++ [x] Extends_GCD
++ [x] FFT+CDQ
++ [x] FFT大整数乘法
++ [x] MTT
++ [x] Fib数模n的循环节
++ [x] Guass
++ [x] [1,n]与a互素个数
++ [x] bernoulli_number
++ [x] factorial
++ [x] gauss_elimination
++ [x] 任意模数FFT+多项式取逆
++ [x] 康拓展开和逆康拓展开
++ [x] 快速幂
++ [x] 杜教筛
++ [x] 线性筛prime+phi+mu
 ## String
 ## Others
