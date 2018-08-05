@@ -84,4 +84,15 @@
 + [x] 杜教筛
 + [x] 线性筛prime+phi+mu
 ## String
+ + [x] AhoCorasick (AC自动机)
+ + [x] EX_KMP
+ + [x] KMP
+ + [x] LIS
+ + [x] Manacher
+ + [x] SA
+ + [x] String Hash
+ + [x] suffix array
+ + [x] 回文树
+ + [x] 动态Trie
+ + [x] 静态Trie
 ## Others
