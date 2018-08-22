@@ -6,6 +6,7 @@
 + [x] pb_ds
 + [x] rope
 + [x] 扩栈
++ [x] O(1)快速乘
 ## Class
 + [x] BigInt
 + [x] Frac
