@@ -1,3 +1,4 @@
+[ACM-OI 's Strategy](https://github.com/LzyRapx/Algorithmic_Template/blob/master/ACM-OI%20's%20Strategy.md)
 # Algorithmic_Library
 #### LzyRapx 's code Library for competitive-programming.
 ## Black_magic
