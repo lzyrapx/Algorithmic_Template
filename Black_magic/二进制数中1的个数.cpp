@@ -167,7 +167,7 @@ tmp + (tmp >> 3)-这句就是是相邻组相加，注意会产生重复相加的
 */
 int BitCount7(unsigned int n) 
 {
-    unsigned inttmp = n - ((n >>1) &033333333333) - ((n >>2) &011111111111);
+    unsigned int tmp = n - ((n >>1) &033333333333) - ((n >>2) &011111111111);
     return ((tmp + (tmp >>3)) &030707070707) %63;
 }
 
@@ -175,4 +175,7 @@ int BitCount7(unsigned int n)
 使用微软提供的指令，首先要确保你的CPU支持SSE4指令，用Everest和CPU-Z可以查看是否支持。  */
 unsigned int n =127 ;
 unsigned int bitCount = _mm_popcnt_u32(n) ;
+
+// 使用gcc编译器提供的内置函数
+unsigned int bitCount = __builtin_popcount(n);
 
