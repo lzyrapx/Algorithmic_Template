@@ -17,7 +17,7 @@ int path[V];
 bool isSafe(int v, bool graph[V][V], int path[], int pos) {
   if(graph[path[pos - 1]][v] == 0) return false;
   for(int i = 0; i < pos; i++) {
-    if(path[i] == v) {
+    if(path[i] == v) { // already visited
       return false;
     }
   }
@@ -52,7 +52,7 @@ void printSolution(int path[]) {
 }
 void hamitltonCycle(bool graph[V][V]) {
   for(int i = 0; i < V; i++) {
-    path[i] = -1;
+    path[i] = -1; // default no one is visited.
   }
   path[0] = 0;
   if(!dfs(graph, path, 1)) {
