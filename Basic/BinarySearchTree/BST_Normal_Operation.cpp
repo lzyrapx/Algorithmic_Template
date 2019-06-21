@@ -76,50 +76,41 @@ string find(Node* root, string k) {
 }
 
 Node* getmin(Node* root) {
-  if(root -> left == nullptr) {
-    return root;
+  struct Node* cur = root;
+  while(cur -> left != nullptr) {
+    cur = cur -> left;
   }
-  return getmin(root -> left);
+  return cur;
 }
-Node* deletemin(Node* root) {
-  if(root -> left == NULL) {
-    return root -> right;
+Node* remove(Node* root, string value) {
+  if(root == nullptr) return root;
+  if(root -> data > value) {
+    root -> left = remove(root -> left, value);
   }
-  root -> left = deletemin(root -> left);
-  return root;
-}
-Node* remove_help(Node* root, string k) {
-  if(root == nullptr) {
-    return nullptr;
-  }
-  if(root -> data > k) {
-    root -> left = remove_help(root -> left, k);
-  }
-  else if(root -> data < k) {
-    root -> right = remove_help(root -> right, k);
+  else if(value > root -> data) {
+    root -> right = remove(root -> right, value);
   }
   else {
+    // node with only one child or no child
     if(root -> left == nullptr) {
-      return root -> right;
+      Node* tmp = root -> right;
+      free(root);
+      return tmp;
     }
     else if(root -> right == nullptr) {
-      return root -> left;
+      Node *tmp = root -> left;
+      free(root);
+      return tmp;
     }
-    else {
-      Node* tmp = getmin(root -> right);
-      root -> data = tmp -> data;
-      root -> right = deletemin(root -> right);
-    }
+    // node with two children: Get the inorder successor (smallest
+    // in the right subtree)
+    Node* tmp = getmin(root -> right);
+    // Copy the inorder successor's content to this node
+    root -> data = tmp -> data;
+    // Delete the inorder successor
+    root -> right = remove(root->right, tmp -> data);
   }
-}
-
-string remove(Node* root, string k) {
-  string tmp = find_help(root, k);
-   std::cout << "tmp = " << tmp << '\n';
-  if(tmp == "exist") {
-    root = remove_help(root, root -> data);
-  }
-  return tmp;
+  return root;
 }
 int main(int argc, char const *argv[]) {
   Node* root = nullptr;
@@ -130,8 +121,8 @@ int main(int argc, char const *argv[]) {
   root = insert_node(root, "abcde");
   level_order(root);
   std::cout << '\n';
-  std::cout << find(root, "a") << '\n';
-  std::cout << remove(root, "a") << '\n';
+  root = remove(root,"a");
+  std::cout << "after delete 'a' : " << '\n';
   level_order(root);
   std::cout << '\n';
   return 0;
