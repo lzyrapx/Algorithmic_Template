@@ -112,11 +112,11 @@ int main(int argc, char const *argv[]) {
   cout << "The Inorder traversal of the tree is : ";
   inorder(root);
   cout << endl;
-	// Postorder permutate from left -> right -> root
+  // Postorder permutate from left -> right -> root
   cout << "The Postorder traversal of the tree is : ";
   postorder(root);
   cout << endl;
-	// Preorder permutate from root -> left -> right
+  // Preorder permutate from root -> left -> right
   cout << "The Preorder traversal of the tree is : ";
   preorder(root);
   cout << endl;
