@@ -104,7 +104,7 @@
  + [x] 静态Trie
 ## Others
 
-
+```
 ├── ACM-OI 's Strategy.md
 ├── ACM-Tech.txt
 ├── Basic
@@ -241,3 +241,4 @@
     ├── 动态Trie.cpp
     ├── 静态Trie.cpp
     └── 回文树.cpp
+```
