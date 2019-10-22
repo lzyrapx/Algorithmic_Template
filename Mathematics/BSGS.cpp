@@ -7,16 +7,21 @@
 // https://www.lydsy.com/JudgeOnline/problem.php?id=2242
 // 给定y,z,p，计算满足 y^x ≡ z ( mod p)的最小非负整数x., p 为素数
 // 复杂度：O(sqrt(p))
-#include <bits/stdc++.h>
+
+#include <iostream>
+#include <cstdio>
+#include <map>
+#include <cmath>
+
 using namespace std;
 typedef long long ll;
 ll qpower(ll a, ll b,ll mod)
 {
-    long long ans=1;
-    while(b>0) {
-        if(b&1) ans=(ans*a)%mod;
-        b>>=1;
-        a=(a*a)%mod;
+    ll ans = 1;
+    while(b > 0) {
+        if(b & 1) ans = (ans * a) % mod;
+        b >>= 1;
+        a = (a * a) % mod;
     }
     return ans;
 }
