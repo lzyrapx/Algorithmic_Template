@@ -1,105 +1,142 @@
+/*
+ * @Author: zhaoyang.liang
+ * @Github: https://github.com/LzyRapx
+ * @Date: 2020-02-21 21:25:47
+ */
+// E(n) be the nth positive eleven-free integer. 
+// find E(1e18)
 #include <iostream>
-#include <string.h>
-#include <stdio.h>
+#include <cstdio>
 #include <algorithm>
+#include <cstring>
 #include <queue>
+
 using namespace std;
-const int maxa = 500000;
-const int cha = 26;
-int n, m, k;
-struct Tire {
-  int next[maxa][cha], fail[maxa], end[maxa];
-  int root, L;
-  int newnode() {
-    for (int i = 0; i < cha; i++) {
-      next[L][i] = -1;
-    }
-    end[L++] = 0;
-    return L - 1;
-  }
-  void init() {
-    L = 0;
-    root = newnode();
-  }
-  void insert(char buf[]) {
-    int len = strlen(buf);
-    int now = root;
-    for (int i = 0; i < len; i++) {
-      if (next[now][buf[i] - 'a'] == -1) next[now][buf[i] - 'a'] = newnode();
-      now = next[now][buf[i] - 'a'];
-      // printf("%d ", now);
-    }  // puts("");
-    end[now]++;
-  }
-  void build() {
-    queue<int> Q;
-    fail[root] = root;
-    for (int i = 0; i < cha; i++) {
-      if (next[root][i] == -1)
-        next[root][i] = root;
-      else {
-        fail[next[root][i]] = root;
-        Q.push(next[root][i]);
-      }
-    }
-    while (!Q.empty()) {
-      int now = Q.front();
-      Q.pop();
-      // end[now] |= end[fail[now]];
-      for (int i = 0; i < cha; i++) {
-        if (next[now][i] == -1)
-          next[now][i] = next[fail[now]][i];
-        else {
-          fail[next[now][i]] = next[fail[now]][i];
-          Q.push(next[now][i]);
-          // printf("**%d %d\n",next[now][i],next[fail[now]][}
+typedef long long ll;
+
+const int maxn = 1e4;
+int trie[maxn][10];
+int cntword[maxn]; // 记录该单词出现次数
+int fail[maxn];
+int cnt = 0;
+long long dp[20][maxn];
+
+void insertWords(string s){
+    int root = 0;
+    for(int i = 0;i < s.size();i++){
+        int next = s[i] - '0';
+        if(!trie[root][next]) {
+          memset(trie[cnt],0,sizeof(trie[cnt]));
+          trie[root][next] = ++cnt;
         }
-      }
+        root = trie[root][next];
     }
-  }
-  int solve(char *s) {
-    int ans = 0, k = 0;
-    for (int i = 0; s[i]; i++) {
-      int t = s[i] - 'a';
-      k = next[k][t];
-      int j = k;
-      while (j) {
-        ans += end[j];
-        // if(end[j]) printf("%d ",j);
-        end[j] = 0;
-        j = fail[j];
-      }  // puts("");
+    cntword[root]++;
+}
+void getFail(){
+    queue<int>q;
+    for(int i = 0;i <= 9; i++){
+        if(trie[0][i]){
+            fail[trie[0][i]] = 0;
+            q.push(trie[0][i]);
+        }
+    }
+    while(!q.empty()){
+        int now = q.front();
+        q.pop();
+        for(int i = 0;i <= 9; i++) {
+            if(trie[now][i]) {
+                fail[trie[now][i]] = trie[fail[now]][i];
+                if(cntword[fail[trie[now][i]]]) {
+                  ++cntword[trie[now][i]];
+                }
+                q.push(trie[now][i]);
+            }
+            else {
+                trie[now][i] = trie[fail[now]][i];
+            }   
+        }
+    }
+}
+int query(string s) {
+    int now = 0,ans = 0;
+    for(int i = 0; i < s.size(); i++){    
+        now = trie[now][s[i] - '0']; 
+        for(int j = now; j > 0 && cntword[j] != -1; j = fail[j]){
+            ans += cntword[j];
+            cntword[j] = -1;
+        }
     }
     return ans;
-  }
-};
-char buf[1000005];
-Tire ac;
-int main() {
-  int t, n;
-  scanf("%d", &t);
-  while (t--) {
-    scanf("%d", &n);
-    ac.init();
-    // memset(ac.end, 0, sizeof(ac.end));
-    for (int i = 0; i < n; i++) {
-      scanf("%s", buf);
-      ac.insert(buf);
-    }
-    ac.build();
-    scanf("%s", buf);
-    printf("%d\n", ac.solve(buf));
-  }
-  return 0;
 }
-
-/*
-1
-5
-abcdefg
-bcdefg
-cdef
-de
-e
-ssaabcdefg
-*/
+int digit[maxn];
+ll dfs(int dep,int state, bool ending)
+{
+    if(dep <= -1) return cntword[state] == 0;
+    if(ending == 0 && dp[dep][state] != -1) return dp[dep][state];
+    int End = ending ? digit[dep] : 9;
+    ll ans = 0;
+    for(int i = 0; i <= End; i++)
+    {
+        if(cntword[trie[state][i]]) continue;
+        ans += dfs(dep-1, trie[state][i],ending && i == End);
+    }
+    if(ending == 0) dp[dep][state] = ans;
+    return ans;
+}
+ll calc(ll x) {
+    if(x == 0) return 0;
+    int len = 0;
+    while(x > 0)
+    {
+        digit[len++]= x % 10;
+        x /= 10;
+    }
+    return dfs(len - 1, 0, 1) - 1;
+}
+int main() {
+    ll N;
+    cin >> N;
+    memset(dp, -1, sizeof(dp));
+    memset(trie, 0, sizeof(trie));
+    memset(fail, -1, sizeof(fail));
+    memset(cntword, 0, sizeof(cntword));
+    ll ans = 1;
+    // string s = "";
+    while(ans <= N / 11)
+    {
+        ans *= 11;
+        int cnt = 0;
+        string s = "";
+        ll tmp = ans;
+        while(tmp > 0)
+        {
+            s = s + to_string(tmp % 10);
+            cnt++;
+            tmp /= 10;
+        }
+        for(int i = 0; i < cnt / 2; i++) {
+            swap(s[i], s[cnt - 1 - i]);
+        }
+        // cout << "cnt = " << cnt << endl;
+        // cout << "s = " << s << endl;
+        insertWords(s);
+    }
+    getFail();
+    calc(N * 9);
+    
+    ll l = N, r = 8 * N;
+    while(l < r) {
+        ll mid = (l + r) / 2;
+        ll ans = calc(mid);
+        if(ans < N) {
+            l = mid + 1;
+        }
+        else {
+            r = mid;
+        }
+    }
+    cout << l << endl;
+    // ans = 1295552661530920149
+    return 0;
+}
