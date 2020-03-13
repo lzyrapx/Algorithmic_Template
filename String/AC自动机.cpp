@@ -5,6 +5,7 @@
  */
 // E(n) be the nth positive eleven-free integer. 
 // find E(1e18)
+// Aho-Corasick automaton
 #include <iostream>
 #include <cstdio>
 #include <algorithm>
