@@ -1,3 +1,8 @@
+/*
+ * @Author: zhaoyang.liang
+ * @Github: https://github.com/LzyRapx
+ * @Date: 2019-06-13 00:02:05
+ */
 #include <cstdio>
 #include <cstring>
 #include <vector>
@@ -22,14 +27,12 @@ struct Node {
 };
 
 stack<Node> Stack;
-//bcc表示的是一个bcc里面的点
 vector<int> bcc[MAXNODE];
-//pre纪录的是时间戳,lowlink纪录的是该点及其该子孙节点所能返回的最早时间戳是多少,bccno纪录的是该点当前是属于哪个bcc的
+
 int head[MAXNODE], pre[MAXNODE], lowlink[MAXNODE], bccno[MAXNODE];
 int n, m, tot, bcc_cnt, dfs_clock, cut_cnt; 
 bool iscut[MAXNODE];
 
-//双向边的添加
 void AddEdge(int u, int v, int id) {
     E[tot] = Edge(v, id, head[u]);
     head[u] = tot++;
@@ -42,20 +45,17 @@ void init() {
     tot = 0;
 }
 
-//点双连通
 void dfs(int u, int fa) {
     pre[u] = lowlink[u] = ++dfs_clock;
-    int child = 0;//纪录当前节点有多少个子节点
+    int child = 0;
     for (int i = head[u]; ~i; i = E[i].next) {
         int v = E[i].v;
         if (!pre[v]) {
             Stack.push(Node(u, v));
             child++;
             dfs(v, u);
-            lowlink[u] = min(lowlink[u], lowlink[v]);//更新
-            //子节点最多返回到该点
+            lowlink[u] = min(lowlink[u], lowlink[v]);
             if (lowlink[v] >= pre[u]) {
-                //该边为桥
                 if (lowlink[v] > pre[u]) {
                     E[i].bridge = E[i ^ 1].bridge = true;
                     cut[cut_cnt++] = E[i];
@@ -76,12 +76,11 @@ void dfs(int u, int fa) {
                 }
             }
         }
-        else if (v != fa && pre[v] < pre[u]) {//反向边
+        else if (v != fa && pre[v] < pre[u]) {
             Stack.push(Node(u, v));
             lowlink[u] = min(lowlink[u], pre[v]);
         }
     }
-    //u是根结点，且只有一个孩子，那就不是割点了
     if (fa < 0 && child == 1) iscut[u] = 0;
 }
 

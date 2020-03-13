@@ -3,9 +3,13 @@
  * @Github: https://github.com/LzyRapx
  * @Date: 2019-06-13 00:02:05
  */
-/*  merge sort
-   求逆序对数量
+
+
+/*  
+    merge sort
+    求逆序对数量
 */
+
 #include <cstdio>
 #include <iostream>
 using namespace std;

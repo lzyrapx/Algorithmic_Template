@@ -1,3 +1,8 @@
+/*
+ * @Author: zhaoyang.liang
+ * @Github: https://github.com/LzyRapx
+ * @Date: 2019-06-13 00:02:05
+ */
 
 /*
 Kosaraju’s algorithm1----
@@ -34,7 +39,6 @@ struct Scc{
     rE[v].PB(u);
   }
   void DFS(int u){
-    // std::cout << "DFS" << '\n';
     vst[u]=1;
     for (auto v : E[u])
       if (!vst[v]) DFS(v);
@@ -48,7 +52,6 @@ struct Scc{
       if (!vst[v]) rDFS(v);
   }
   void solve(){
-    // std::cout << "solve" << '\n';
     nScc = 0;
     vec.clear();
     for (int i=0; i<n; i++) vst[i] = 0;
@@ -56,7 +59,7 @@ struct Scc{
       if (!vst[i]) DFS(i);
 
     // the algorithm reverses every edge in the graph. This guarantees-
-	// that during the second search, we will always find strongly connected components that do not have extra nodes.
+	  // that during the second search, we will always find strongly connected components that do not have extra nodes.
   
     reverse(vec.begin(),vec.end());
     for (int i=0; i<n; i++) vst[i] = 0;
